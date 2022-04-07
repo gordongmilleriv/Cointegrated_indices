@@ -1,10 +1,10 @@
-# Cointegrated Indices Python Project
+# Cointegrated Indices Machine Learning Project
 
 ## Project motivation 
-In my financial statistics classes we briefly covered the concepts of time series and the mathematics behind some of these analyses. We covered topics such as autoarima models, transforming time series to be stationary, and testing for cointegration between time series. However, we never got the chance to put these theories to the test using programs such as python. I decided to take two volatility indeces, EVZ(CBOE Eurocurrency Volatility Index) and VXEEM(CBOE Emerging Mkts ETF Volatility Index), and utilize the concepts I learned in class to find if these two indeces are cointegrated or not. 
+In my financial statistics classes we briefly covered the concepts of time series and the mathematics behind some of these analyses. We covered topics such as autoarima models, transforming time series to be stationary, and testing for cointegration between time series. However, we never got the chance to put these theories to the test using programs such as python. I decided to take two volatility indeces, EVZ(CBOE Eurocurrency Volatility Index) and VXEEM(CBOE Emerging Mkts ETF Volatility Index), and utilize the concepts I learned in class to find if these two indeces are cointegrated or not and use an Auto ARIMA model to predict the indeces future values. 
 
 ## What's this project do?
-The goal of the following project was to determine if the volatility indices EVZ and VXEEM are cointegrated. Cointegration refers to a correlation between time series in the long term. If these series are in fact correlated then it's possible that a pair trading strategy could be used to create abnormal returns.
+The goal of the following project was to determine if the volatility indices EVZ and VXEEM are cointegrated. Cointegration refers to a correlation between time series' in the long term. This project takes the two time series defined by the user and transforms the data so that they are stationary. 
 
 ## Why is this useful?
 
