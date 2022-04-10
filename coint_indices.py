@@ -114,26 +114,26 @@ dfs2.to_csv("stationary_descriptiveStatistics.csv", mode="a")
 #perform two sample t test on EVZ where null is there is no difference between the two means
 t1 = ttest_ind(df1.EVZ,df2.EVZ)
 print("t-statistic (EVZ) = ",round(t1[0],4)," p-value = ",round(t1[1],4))
-#found no significant difference in means between two samples
+#found significant difference in means between two samples
 
 num = max(st.variance(df1.EVZ),st.variance(df2.EVZ))
 denom= min(st.variance(df1.EVZ),st.variance(df2.EVZ))
 fstat = num/denom
 pf = 1 - f.cdf(fstat,len(df1.EVZ),len(df2.EVZ))
 print("F (EVZ) = ",round(fstat,4), " p-value = ", round(pf,4))
-#No significant difference in variances
+#significant difference in variances
 
 #perform two sample t test on VXEEM where null is there is no difference between the two means
 t2 = ttest_ind(df1.VXEEM,df2.VXEEM)
 print("t-statistic (VXEEM) = ",round(t1[0],4)," p-value = ",round(t1[1],4))
-#found no significant difference in means between two samples
+#found significant difference in means between two samples
 
 num = max(st.variance(df1.VXEEM),st.variance(df2.VXEEM))
 denom= min(st.variance(df1.VXEEM),st.variance(df2.VXEEM))
 fstat = num/denom
 pf = 1 - f.cdf(fstat,len(df1.VXEEM),len(df2.VXEEM))
 print("F (VXEEM) = ",round(fstat,4), " p-value = ", round(pf,4))
-#Note: F-test on VXEEM found that there is significant difference in the variances from our split up samples
+#F-test on VXEEM found that there is no significant difference in the variances from our split up samples
 
 #Test for Stationarity - ADF Test - Null hypothesis is that the series is a unit root
 EVZ_ADF = adfuller(df.EVZ,autolag="BIC")
