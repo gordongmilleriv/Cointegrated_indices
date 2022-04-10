@@ -27,20 +27,21 @@ EVZ_df = pd.read_csv(EVZ, parse_dates=True,index_col=0,na_values=[".",""])
 VXEEM_df = pd.read_csv(VXEEM, parse_dates=True,index_col=0,na_values=[".",""])
 
 
-
-df = pd.merge(EVZ_df,VXEEM_df,how="inner",on="DATE")
 #merge on date
+df = pd.merge(EVZ_df,VXEEM_df,how="inner",on="DATE")
 print(EVZ_df.head)
 print(VXEEM_df.head)
 print("EVZ number of observations:", len(EVZ_df))
 print("VXEEM number of observations:", len(VXEEM_df))
+
 #rename columns to be more user friendly
 df=df.rename(columns={"EVZCLS":"EVZ","VXEEMCLS":"VXEEM"})
 print("Number of observations for both series:", len(df))
+#drop NA values
 df=df.dropna()
 print("Number of non-missing observations for both series:", len(df))
 
-##plot EVZ and VXEEM on a line chart with two y axes
+##plot EVZ and VXEEM values on a line chart with two y axes
 
 fig, ax1 = plt.subplots()
 
@@ -71,7 +72,7 @@ fig.tight_layout()
 plt.show()
 
 
-#create rolling correlations between EVZ and VXEEM
+#calculate rolling correlations between EVZ and VXEEM
 s1 = pd.Series(df.EVZ)
 s2 = pd.Series(df.VXEEM)
 s3 = s1.rolling(21).corr(s2)
@@ -88,11 +89,12 @@ plt.xlabel("Date (Year)")
 plt.ylabel("Correlation")
 plt.show()
 
+#descriptive stats for rolling correlations
 print("highest rolling correlation:",max(s3))
 print("Lowest rolling correaltion:", min(s3))
 print("Average rolling correaltion:", s3.mean())
 
-#split sample in half 
+#split sample in half to test if mean and standard deviation are significantly different when comparing the two samples
 cutoff = round(len(df)/2)
 print("Division",cutoff)
 
@@ -104,30 +106,34 @@ dfs = df.describe()
 dfs1 = df1.describe()
 dfs2 = df2.describe()
 
-dfs.to_csv("Assignment2_descriptiveStatistics.csv")
-dfs1.to_csv("Assignment2_descriptiveStatistics.csv", mode="a")
-dfs2.to_csv("Assignment2_descriptiveStatistics.csv", mode="a")
+#output descriptive stats into a csv file
+dfs.to_csv("stationary_descriptiveStatistics.csv")
+dfs1.to_csv("stationary_descriptiveStatistics.csv", mode="a")
+dfs2.to_csv("stationary_descriptiveStatistics.csv", mode="a")
 
-#perform t test on EVZ where null is there is no difference between the two means
+#perform two sample t test on EVZ where null is there is no difference between the two means
 t1 = ttest_ind(df1.EVZ,df2.EVZ)
 print("t-statistic (EVZ) = ",round(t1[0],4)," p-value = ",round(t1[1],4))
+#found no significant difference in means between two samples
 
 num = max(st.variance(df1.EVZ),st.variance(df2.EVZ))
 denom= min(st.variance(df1.EVZ),st.variance(df2.EVZ))
 fstat = num/denom
 pf = 1 - f.cdf(fstat,len(df1.EVZ),len(df2.EVZ))
 print("F (EVZ) = ",round(fstat,4), " p-value = ", round(pf,4))
+#No significant difference in variances
 
-#perform t test on VXEEM where null is there is no difference between the two means
+#perform two sample t test on VXEEM where null is there is no difference between the two means
 t2 = ttest_ind(df1.VXEEM,df2.VXEEM)
 print("t-statistic (VXEEM) = ",round(t1[0],4)," p-value = ",round(t1[1],4))
+#found no significant difference in means between two samples
 
 num = max(st.variance(df1.VXEEM),st.variance(df2.VXEEM))
 denom= min(st.variance(df1.VXEEM),st.variance(df2.VXEEM))
 fstat = num/denom
 pf = 1 - f.cdf(fstat,len(df1.VXEEM),len(df2.VXEEM))
 print("F (VXEEM) = ",round(fstat,4), " p-value = ", round(pf,4))
-#Note: F-test on VXEEM found that there is no significant difference in the variances from our split up samples
+#Note: F-test on VXEEM found that there is significant difference in the variances from our split up samples
 
 #Test for Stationarity - ADF Test - Null hypothesis is that the series is a unit root
 EVZ_ADF = adfuller(df.EVZ,autolag="BIC")
