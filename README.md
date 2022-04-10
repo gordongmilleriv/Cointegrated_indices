@@ -21,7 +21,20 @@ In my financial analytics class we briefly covered the concepts of time series a
 - easygui
 
 
-## What's this project do?
-The goal of the following project was to predict the future values of EVZ and VXEEM and determine if these indeces are cointegrated. The program takes the two time series defined by the user and visualizes the rolling correlations between the two series before transforming the data to stationary time series. To ensure that the time series are in fact stationary I used an ADF test. Now that the time series are stationary we can split our data into a training and test and fit an autoarima model to the training data. 
+## What's does this project do?
+- Visualize index values
+- Calculate and visualize rolling correlations between indeces
+- Transforms indeces to be statinoary using differencing 
+- Split indeces in half and perform a two sample t test and an F test to evaluate stationarity 
+- Use ADF test to check that indeces are stationary 
+- Calculate auto correlations and plot to determine paramters for autoarima model
+- Plot predictions made by autoarima model against actual values from testing set 
+- Conclude whether the indeces are correlated using an augmented Engle-Granger two-step cointegration test
 
 ## Why is this useful?
+This program can be helpful for forecasting any time series data. Specifically for stocks and indeces it can be used to identify and develop pairs trading strategies and visualize results. When testing EVZ and VXEEM I concluded that EVZ and VXEEM are in fact cointegrated meaning they have a mean reverting relationship that can be statistically exploited for pairs trading. Because these series are correlated in the long term if they ever diverge from this relationship it would give us a trading opportunity to short one and long the other. 
+
+## Future imporvements
+- Implement a statement that selects the method data transformation of the user's time series' that minimizes the p-value of the ADF test 
+- Tune the parameters of the autoarima model to minimize the residuals
+- Evaluate the normality of the stationarity of the residuals for the model and the autocorrelation between residuals
