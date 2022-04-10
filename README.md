@@ -28,13 +28,13 @@ In my financial analytics class we briefly covered the concepts of time series a
 - Split indeces in half and perform a two sample t test and an F test to evaluate stationarity 
 - Use ADF test to check that indeces are stationary 
 - Calculate auto correlations and plot to determine paramters for autoarima model
-- Plot predictions made by autoarima model against actual values from testing set 
+- Train autoarima model and plot predictions against actual values from testing set 
 - Conclude whether the indeces are correlated using an augmented Engle-Granger two-step cointegration test
 
 ## Why is this useful?
 This program can be helpful for forecasting any time series data. Specifically for stocks and indeces it can be used to identify and develop pairs trading strategies and visualize results. When testing EVZ and VXEEM I concluded that EVZ and VXEEM are in fact cointegrated meaning they have a mean reverting relationship that can be statistically exploited for pairs trading. Because these series are correlated in the long term if they ever diverge from this relationship it would give us a trading opportunity to short one and long the other. 
 
-## Future imporvements
+## Future improvements
 - Create an automation where if the series diverge from their long term relationship then a trade will be executed on the two stocks/indices
 - Implement a statement that selects the method data transformation of the user's time series' that minimizes the p-value of the ADF test 
 - Tune the parameters of the autoarima model to minimize the residuals
