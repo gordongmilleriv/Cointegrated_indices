@@ -24,7 +24,7 @@ In my financial analytics class we briefly covered the concepts of time series a
 ## What's does this project do?
 - Visualize index values
 - Calculate and visualize rolling correlations between indeces
-- Transforms indeces to be statinoary using differencing 
+- Transforms indeces to be stationary using differencing 
 - Split indeces in half and perform a two sample t test and an F test to evaluate stationarity 
 - Use ADF test to check that indeces are stationary 
 - Calculate auto correlations and plot to determine paramters for autoarima model
