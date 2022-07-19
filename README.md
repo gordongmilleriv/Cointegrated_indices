@@ -22,7 +22,7 @@ In my financial analytics class we briefly covered the concepts of time series a
 
 
 ## What's does this project do?
-- Visualize index values
+- Visualize stock index/time series values
 - Calculate and visualize rolling correlations between indeces
 - Transforms indeces to be stationary using differencing 
 - Split indeces in half and perform a two sample t test and an F test to evaluate stationarity 
